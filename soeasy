@@ -6,7 +6,6 @@ local CoreGui = game:GetService("CoreGui")
 
 local player = Players.LocalPlayer
 
--- 개선된 테마 색상
 local themes = {
     Dark = {
         background = Color3.fromRGB(18, 18, 18),
@@ -36,7 +35,7 @@ local themes = {
 
 local currentTheme = "Dark"
 
--- Create sounds
+
 local clickSound = Instance.new("Sound")
 clickSound.SoundId = "rbxassetid://6042054027"
 clickSound.Volume = 0.5
@@ -47,13 +46,13 @@ hoverSound.SoundId = "rbxassetid://6042054776"
 hoverSound.Volume = 0.2
 hoverSound.Parent = SoundService
 
--- Create the main GUI
+
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "ThemeableToolGrabberGUI"
 screenGui.ResetOnSpawn = false
 screenGui.Parent = CoreGui
 
--- Create the main frame
+
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
 mainFrame.Size = UDim2.new(0, 320, 0, 450)
@@ -63,12 +62,12 @@ mainFrame.BorderSizePixel = 0
 mainFrame.ClipsDescendants = true
 mainFrame.Parent = screenGui
 
--- Create rounded corners
+
 local cornerRadius = Instance.new("UICorner")
 cornerRadius.CornerRadius = UDim.new(0, 12)
 cornerRadius.Parent = mainFrame
 
--- Create title
+
 local title = Instance.new("TextLabel")
 title.Name = "Title"
 title.Size = UDim2.new(1, 0, 0, 60)
@@ -76,14 +75,14 @@ title.BackgroundColor3 = themes[currentTheme].foreground
 title.TextColor3 = themes[currentTheme].text
 title.Font = Enum.Font.GothamBold
 title.TextSize = 28
-title.Text = "Tool Grabber Pro"
+title.Text = "By 09gw"
 title.Parent = mainFrame
 
 local titleCorner = Instance.new("UICorner")
 titleCorner.CornerRadius = UDim.new(0, 12)
 titleCorner.Parent = title
 
--- Create toggle button
+
 local toggleButton = Instance.new("TextButton")
 toggleButton.Name = "ToggleButton"
 toggleButton.Size = UDim2.new(0.9, 0, 0, 50)
@@ -100,7 +99,7 @@ local toggleCorner = Instance.new("UICorner")
 toggleCorner.CornerRadius = UDim.new(0, 10)
 toggleCorner.Parent = toggleButton
 
--- Create delay input
+
 local delayInput = Instance.new("TextBox")
 delayInput.Name = "DelayInput"
 delayInput.Size = UDim2.new(0.9, 0, 0, 50)
@@ -117,7 +116,7 @@ local delayCorner = Instance.new("UICorner")
 delayCorner.CornerRadius = UDim.new(0, 10)
 delayCorner.Parent = delayInput
 
--- Create buttons for different modes
+
 local allToolsButton = Instance.new("TextButton")
 allToolsButton.Name = "AllToolsButton"
 allToolsButton.Size = UDim2.new(0.425, 0, 0, 50)
@@ -150,7 +149,7 @@ local specificToolsCorner = Instance.new("UICorner")
 specificToolsCorner.CornerRadius = UDim.new(0, 10)
 specificToolsCorner.Parent = specificToolsButton
 
--- Create input for custom tool names
+
 local customToolInput = Instance.new("TextBox")
 customToolInput.Name = "CustomToolInput"
 customToolInput.Size = UDim2.new(0.9, 0, 0, 50)
@@ -167,7 +166,7 @@ local customToolCorner = Instance.new("UICorner")
 customToolCorner.CornerRadius = UDim.new(0, 10)
 customToolCorner.Parent = customToolInput
 
--- Create theme selector
+
 local themeSelector = Instance.new("TextButton")
 themeSelector.Name = "ThemeSelector"
 themeSelector.Size = UDim2.new(0.9, 0, 0, 50)
@@ -184,13 +183,13 @@ local themeSelectorCorner = Instance.new("UICorner")
 themeSelectorCorner.CornerRadius = UDim.new(0, 10)
 themeSelectorCorner.Parent = themeSelector
 
--- Variables
+
 local enabled = true
 local delay = 0.01
 local mode = "specific"
 local customTools = {}
 
--- Functions
+
 local function playClickSound()
     clickSound:Play()
 end
@@ -199,7 +198,7 @@ local function playHoverSound()
     hoverSound:Play()
 end
 
--- 개선된 버튼 애니메이션 함수
+
 local function animateButton(button, isHover)
     local theme = themes[currentTheme]
     local targetColor
@@ -280,7 +279,7 @@ local function updateTheme()
     updateModeButtons()
 end
 
--- Connect button events
+
 toggleButton.MouseButton1Click:Connect(function()
     playClickSound()
     enabled = not enabled
@@ -310,12 +309,12 @@ themeSelector.MouseButton1Click:Connect(function()
     updateTheme()
 end)
 
--- Apply hover effects to all buttons
+
 for _, button in ipairs({toggleButton, allToolsButton, specificToolsButton, themeSelector}) do
     handleButtonHover(button)
 end
 
--- Main loop
+
 spawn(function()
     while true do
         if enabled then
@@ -325,7 +324,7 @@ spawn(function()
     end
 end)
 
--- Update delay when input changes
+
 delayInput.FocusLost:Connect(function(enterPressed)
     if enterPressed then
         local newDelay = tonumber(delayInput.Text)
@@ -337,7 +336,7 @@ delayInput.FocusLost:Connect(function(enterPressed)
     end
 end)
 
--- Update custom tools when input changes
+
 customToolInput.FocusLost:Connect(function(enterPressed)
     if enterPressed then
         customTools = {}
@@ -351,7 +350,7 @@ customToolInput.FocusLost:Connect(function(enterPressed)
     end
 end)
 
--- Make the frame draggable
+
 local dragging
 local dragInput
 local dragStart
@@ -390,12 +389,12 @@ UserInputService.InputChanged:Connect(function(input)
     end
 end)
 
--- Initialize
+
 updateTheme()
 updateToggleButton()
 updateModeButtons()
 
--- Add fade-in animation
+
 mainFrame.BackgroundTransparency = 1
 for _, child in ipairs(mainFrame:GetChildren()) do
     if child:IsA("GuiObject") then
